@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinay Gupta | Senior Web Developer & Shopify Specialist</title>
+        <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --primary-glow: rgba(59, 130, 246, 0.15);
+            --bg-darker: #090d16;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #263548;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --text-light: #cbd5e1;
+            --border-card: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(59, 130, 246, 0.3);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --container-padding: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--bg-dark);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at top right, rgba(59, 130, 246, 0.08), transparent 45%),
+                              radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.05), transparent 40%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-darker); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-hover); }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: var(--container-padding);
+            padding-right: var(--container-padding);
+        }
+
+        section { padding: 80px 0; }
+
+        h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.15; font-weight: 800; }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.25; font-weight: 700; }
+        h3 { font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 600; }
+        p { color: var(--text-light); font-size: 16px; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+        }
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+        .btn-secondary {
+            border: 1px solid var(--primary);
+            color: #fff;
+            background: transparent;
+        }
+        .btn-secondary:hover {
+            background: var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        .section-heading { text-align: center; margin-bottom: 60px; }
+        .section-heading span {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .section-heading h2 { max-width: 800px; margin: 0 auto; }
+        .section-heading p { max-width: 700px; margin: 15px auto 0; color: var(--text-muted); }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+        .navbar-container { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+        .logo { font-size: 24px; font-weight: 700; color: var(--text-main); text-decoration: none; display: flex; align-items: center; }
+        .logo span { color: var(--primary); }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-item {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        .nav-item:hover, .nav-item.active { color: var(--primary); }
+        .nav-item:hover::after, .nav-item.active::after { width: 100%; }
+        .nav-toggle { display: none; background: transparent; border: none; cursor: pointer; padding: 5px; z-index: 1001; }
+        .hamburger { display: block; position: relative; width: 24px; height: 2px; background: var(--text-main); transition: var(--transition); }
+        .hamburger::before, .hamburger::after { content: ''; position: absolute; left: 0; width: 100%; height: 2px; background: var(--text-main); transition: var(--transition); }
+        .hamburger::before { top: -6px; }
+        .hamburger::after { bottom: -6px; }
+        .nav-toggle.active .hamburger { background: transparent; }
+        .nav-toggle.active .hamburger::before { transform: rotate(45deg); top: 0; }
+        .nav-toggle.active .hamburger::after { transform: rotate(-45deg); bottom: 0; }
+
+        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 120px; padding-bottom: 60px; }
+        .hero-content { max-width: 800px; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 50px;
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
+        .hero h1 span { color: var(--primary); position: relative; display: inline-block; }
+        .hero p { font-size: clamp(16px, 2vw, 18px); color: var(--text-light); line-height: 1.8; margin-top: 20px; margin-bottom: 35px; max-width: 650px; }
+        .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 50px; }
+        .hero-stats { display: flex; gap: clamp(30px, 6vw, 60px); flex-wrap: wrap; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 30px; }
+        .stat h3 { font-size: clamp(28px, 4vw, 36px); color: var(--primary); font-weight: 700; }
+        .stat span { color: var(--text-muted); font-size: 14px; }
+
+        .about { background: var(--bg-darker); border-top: 1px solid rgba(255, 255, 255, 0.02); border-bottom: 1px solid rgba(255, 255, 255, 0.02); }
+        .about-wrapper { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(40px, 6vw, 80px); align-items: center; }
+        .about-image { position: relative; max-width: 420px; justify-self: center; width: 100%; }
+        .about-image img { width: 100%; border-radius: 20px; display: block; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .experience-box {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--primary);
+            padding: 20px 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .experience-box h3 { font-size: clamp(28px, 4vw, 36px); color: #fff; font-weight: 700; line-height: 1.1; }
+        .experience-box p { color: #fff; font-size: 13px; font-weight: 500; margin-top: 2px; }
+        .about-content h3 { font-size: clamp(24px, 3.5vw, 32px); margin-bottom: 20px; }
+        .about-content p { color: var(--text-light); line-height: 1.8; margin-bottom: 20px; font-size: 16px; }
+        .about-content strong { color: var(--primary); }
+        .about-info { margin-top: 35px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+        .info-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; padding: 20px; transition: var(--transition); }
+        .info-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 10px 20px rgba(59, 130, 246, 0.05); }
+        .info-card h4 { color: var(--primary); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .info-card p { margin: 0; color: var(--text-main); font-weight: 500; }
+
+        .experience { background: var(--bg-dark); }
+        .timeline { position: relative; max-width: 800px; margin: 50px auto 0; }
+        .timeline::before { content: ""; position: absolute; left: 20px; top: 0; width: 2px; height: 100%; background: rgba(59, 130, 246, 0.2); }
+        .timeline-item { position: relative; padding-left: 60px; margin-bottom: 50px; }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-dot {
+            position: absolute;
+            left: 11px;
+            top: 8px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 4px solid var(--bg-dark);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+            transition: var(--transition);
+        }
+        .timeline-item:hover .timeline-dot { background: #fff; box-shadow: 0 0 0 6px var(--primary); }
+        .timeline-content { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 16px; padding: 30px; transition: var(--transition); }
+        .timeline-content:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(59, 130, 246, 0.08); }
+        .timeline-date {
+            display: inline-block;
+            background: var(--primary-glow);
+            color: var(--primary);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .timeline-content h3 { font-size: 22px; margin-bottom: 5px; }
+        .timeline-content h4 { color: var(--primary); font-size: 15px; font-weight: 500; margin-bottom: 15px; }
+        .timeline-content p { color: var(--text-light); line-height: 1.7; margin-bottom: 20px; font-size: 15px; }
+        .tech-stack { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tech-stack span {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 13px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .expertise { background: var(--bg-darker); }
+        .expertise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr)); gap: 25px; }
+        .expertise-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 18px; padding: 30px; transition: var(--transition); }
+        .expertise-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 20px 35px rgba(59, 130, 246, 0.1); }
+        .expertise-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: var(--primary-glow);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            font-size: 26px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+        .expertise-card:hover .expertise-icon { background: var(--primary); color: #fff; transform: scale(1.05); }
+        .expertise-card h3 { font-size: 20px; margin-bottom: 12px; }
+        .expertise-card p { color: var(--text-light); font-size: 15px; line-height: 1.7; }
+
+        .projects { background: var(--bg-dark); }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 25px; }
+        .project-card { border-radius: 16px; overflow: hidden; background: var(--bg-card); border: 1px solid var(--border-card); transition: var(--transition); }
+        .project-link { display: flex; flex-direction: column; justify-content: space-between; min-height: 140px; padding: 25px 20px; text-decoration: none; height: 100%; }
+        .project-card:hover { transform: translateY(-6px); border-color: var(--primary); background: var(--bg-card-hover); box-shadow: 0 15px 35px rgba(59, 130, 246, 0.12); }
+        .project-content { display: flex; flex-direction: column; align-items: flex-start; }
+        .project-badge { font-size: 11px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; padding: 3px 8px; border-radius: 30px; background: rgba(59, 130, 246, 0.1); color: var(--primary); margin-bottom: 12px; }
+        .project-content h3 { color: var(--text-main); font-size: 19px; font-weight: 600; line-height: 1.3; }
+        .project-meta { display: flex; align-items: center; margin-top: 15px; color: var(--text-muted); font-size: 13px; font-weight: 500; }
+        .project-meta svg { margin-left: 6px; transition: var(--transition); stroke: currentColor; fill: none; }
+        .project-card:hover .project-meta svg { transform: translateX(4px); stroke: #60a5fa; }
+
+        .stats { background: var(--bg-darker); }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); gap: 20px; }
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 16px; padding: 35px 20px; text-align: center; transition: var(--transition); }
+        .stat-card:hover { transform: translateY(-6px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(59, 130, 246, 0.1); }
+        .stat-card h3 { font-size: clamp(38px, 5vw, 48px); color: var(--primary); margin-bottom: 8px; font-weight: 700; }
+        .stat-card span { color: var(--text-light); font-size: 15px; display: block; }
+
+        .education { background: var(--bg-dark); }
+        .services { background: var(--bg-darker); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr)); gap: 25px; }
+        .service-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 18px; padding: 30px; transition: var(--transition); }
+        .service-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 20px 35px rgba(59, 130, 246, 0.1); }
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .service-card h3 { font-size: 20px; margin-bottom: 12px; }
+        .service-card p { color: var(--text-light); font-size: 15px; line-height: 1.7; }
+
+        .footer { background: var(--bg-darker); border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 60px 0 30px 0; }
+        .footer-content { display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px; }
+        .footer-brand p { color: var(--text-muted); margin-top: 15px; max-width: 320px; font-size: 14px; }
+        .footer-col h4 { color: var(--text-main); font-size: 16px; font-weight: 600; margin-bottom: 20px; position: relative; }
+        .footer-col h4::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 30px; height: 2px; background: var(--primary); }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: var(--text-light); text-decoration: none; font-size: 14px; transition: var(--transition); }
+        .footer-col ul li a:hover { color: var(--primary); padding-left: 4px; }
+        .footer-contact-info p { color: var(--text-light); font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .footer-bottom p { color: var(--text-muted); font-size: 13px; }
+        .social-links { display: flex; gap: 15px; }
+        .social-link { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.05); border-radius: 50%; color: var(--text-light); text-decoration: none; transition: var(--transition); font-size: 14px; }
+        .social-link:hover { background: var(--primary); color: #fff; transform: translateY(-3px); }
+
+        @media (max-width: 991px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(9, 13, 22, 0.98);
+                backdrop-filter: blur(12px);
+                flex-direction: column;
+                justify-content: center;
+                gap: 40px;
+                transition: var(--transition);
+                z-index: 999;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            .nav-links.active { left: 0; }
+            .nav-toggle { display: block; }
+            .nav-item { font-size: 20px; }
+            .about-wrapper { grid-template-columns: 1fr; gap: 50px; }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+            .footer-brand { grid-column: span 2; }
+        }
+        @media (max-width: 768px) {
+            section { padding: 60px 0; }
+            .hero { text-align: center; padding-top: 110px; padding-bottom: 40px; }
+            .hero-content { display: flex; flex-direction: column; align-items: center; }
+            .hero p { margin-inline: auto; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; gap: 30px; }
+            .timeline::before { left: 14px; }
+            .timeline-item { padding-left: 45px; }
+            .timeline-dot { left: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- STICKY HEADER -->
+    <header>
+        <div class="container navbar-container">
+            <a href="#" class="logo">Vinay<span>.</span></a>
+            <nav class="nav-links" id="navLinks">
+                <a href="#" class="nav-item active">Home</a>
+                <a href="#about" class="nav-item">About</a>
+                <a href="#experience" class="nav-item">Experience</a>
+                <a href="#skills" class="nav-item">Skills</a>
+                <a href="#projects" class="nav-item">Projects</a>
+                <a href="#services" class="nav-item">Services</a>
+            </nav>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge">👋 Available for Senior Web & Shopify Opportunities</span>
+                <h1>
+                    Hi, I'm <span>Vinay Gupta</span><br>
+                    Senior Web Developer & Shopify Specialist
+                </h1>
+                <p>
+                    Specializing in custom e-commerce applications, Shopify Plus, enterprise ERP integrations, 
+                    and high-performance storefront scaling with 8+ years of expertise.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="Vinay Gupta CV 8+ YOE 2026 (1).docx" class="btn btn-secondary" download>Download Resume</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>8+</h3>
+                        <span>Years Experience</span>
+                    </div>
+                    <div class="stat">
+                        <h3>30+</h3>
+                        <span>E-commerce Stores Built</span>
+                    </div>
+                    <div class="stat">
+                        <h3>99.9%</h3>
+                        <span>Performance & Uptime</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-heading">
+                <span>About Me</span>
+                <h2>Passionate Developer Creating Exceptional E-Commerce Experiences</h2>
+            </div>
+            <div class="about-wrapper">
+                <div class="about-image">
+                    <img src="Myphoto.jpg" alt="Vinay Gupta Profile Picture" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=60'">
+                    <div class="experience-box">
+                        <h3>8+</h3>
+                        <p>Years Experience</p>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <h3>Hello! I'm Vinay Gupta 👋</h3>
+                    <p>
+                        I am a highly motivated and detail-oriented Web Developer with <strong>over 8 years of experience</strong>[cite: 1] specializing in e-commerce platforms like Shopify, Shopify Plus, and WordPress[cite: 1].
+                    </p>
+                    <p>
+                        My core strengths include end-to-end e-commerce setup, custom theme engineering using Liquid, JavaScript, and PHP, as well as complex enterprise integrations like Bluecherry ERP, Global-E, and Recharge subscriptions.
+                    </p>
+                    <div class="about-info">
+                        <div class="info-card">
+                            <h4>Experience</h4>
+                            <p>8+ Years</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>Specialization</h4>
+                            <p>Shopify Plus & ERP</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>Location</h4>
+                            <p>India</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>Availability</h4>
+                            <p>Open to Work</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <div class="section-heading">
+                <span>My Journey</span>
+                <h2>Professional Experience</h2>
+            </div>
+            <div class="timeline">
+                <!-- Exp 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">April 2023 – Present</span>
+                        <h3>Senior Web Developer</h3>
+                        <h4>Airwebs Business Solutions</h4>
+                        <p>
+                            Spearheaded complex Shopify theme customization and backend integration using Liquid, JavaScript, JSON, and GraphQL APIs. Configured Global-E and Shopify Markets for multi-region expansion and connected storefronts with Bluecherry ERP for automated inventory sync.
+                        </p>
+                        <div class="tech-stack">
+                            <span>Shopify Plus</span><span>Liquid</span><span>JavaScript</span><span>GraphQL</span><span>Global-E</span><span>Bluecherry ERP</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Exp 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Jan 2020 – March 2023</span>
+                        <h3>Shopify Developer</h3>
+                        <h4>Faircode Technologies</h4>
+                        <p>
+                            Developed and integrated custom Shopify REST and GraphQL APIs. Built custom integrations with enterprise ERP solutions, synchronized physical POS systems with online stores, and implemented subscription solutions using the Recharge API.
+                        </p>
+                        <div class="tech-stack">
+                            <span>Shopify</span><span>REST APIs</span><span>Recharge API</span><span>Shopify POS</span><span>PHP</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Exp 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Oct 2018 – Dec 2019</span>
+                        <h3>Web Developer</h3>
+                        <h4>DMS India</h4>
+                        <p>
+                            Developed and maintained custom Shopify and WordPress sites using Liquid, HTML5, CSS3, JavaScript, and Elementor. Executed performance optimization routines and handled payment gateway integrations.
+                        </p>
+                        <div class="tech-stack">
+                            <span>WordPress</span><span>Shopify</span><span>Elementor</span><span>JavaScript</span><span>WooCommerce</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Exp 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">April 2018 – Sept 2018</span>
+                        <h3>Web Developer</h3>
+                        <h4>Natrix Technology Pvt Ltd</h4>
+                        <p>
+                            Built e-commerce stores on Shopify and WordPress platforms, engineered custom responsive Liquid templates, and performed comprehensive performance tuning.
+                        </p>
+                        <div class="tech-stack">
+                            <span>Shopify</span><span>WordPress</span><span>Liquid</span><span>CSS3</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Exp 5 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">July 2017 – March 2018</span>
+                        <h3>WordPress Developer</h3>
+                        <h4>Youngistan Business Solutions Pvt Ltd</h4>
+                        <p>
+                            Developed WordPress/WooCommerce websites using custom PHP themes, page builders, and payment integrations. Managed site performance optimization and security hardening.
+                        </p>
+                        <div class="tech-stack">
+                            <span>WordPress</span><span>PHP</span><span>WooCommerce</span><span>Elementor</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNICAL EXPERTISE SECTION -->
+    <section class="expertise" id="skills">
+        <div class="container">
+            <div class="section-heading">
+                <span>Technical Expertise</span>
+                <h2>Technologies & Skills I Work With</h2>
+                <p>Comprehensive stack covering modern e-commerce architectures, headless integrations, and performance engineering.</p>
+            </div>
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <div class="expertise-icon">💎</div>
+                    <h3>Shopify & Shopify Plus</h3>
+                    <p>Expert custom theme development, Liquid architecture, Shopify Markets, POS systems, and global multi-currency scaling.</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="expertise-icon">🔌</div>
+                    <h3>Enterprise Integrations</h3>
+                    <p>Connecting storefronts to Bluecherry ERP, Recharge subscriptions, custom REST/GraphQL APIs, and automated webhooks.</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="expertise-icon">🚀</div>
+                    <h3>Performance Optimization</h3>
+                    <p>Advanced Core Web Vitals tuning, asset compression, lazy loading, and speed optimization for higher conversion rates.</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="expertise-icon">⚡</div>
+                    <h3>Core Web Technologies</h3>
+                    <p>Proficient in JavaScript, HTML5, CSS3, PHP, CodeIgniter, and SQL database management.</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="expertise-icon">🌐</div>
+                    <h3>WordPress & WooCommerce</h3>
+                    <p>Custom theme building, Elementor configuration, plugin development, and secure e-commerce deployment.</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="expertise-icon">📱</div>
+                    <h3>Cross-Border Solutions</h3>
+                    <p>Global-E integration, localized multi-region checkouts, cross-border logistics rules, and automated tax systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO PROJECTS SECTION -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-heading">
+                <span>Portfolio</span>
+                <h2>Featured Shopify & WordPress Projects</h2>
+                <p>A selection of production e-commerce stores, custom brand builds, and enterprise platforms I've developed.</p>
+            </div>
+            <div class="projects-grid">
+                <article class="project-card"><a href="https://flowermoxie.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Shopify Plus</span><h3>Flower Moxie</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://chikupiku.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Shopify Store</span><h3>Chikupiku</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://mumandyou.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Shopify Store</span><h3>Mum & You</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://ardurshoes.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Shopify Store</span><h3>Ardur Shoes</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://timaan.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Shopify Store</span><h3>Timaan Jewels</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://shop.jenniferjohnsonstudio.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Shopify Store</span><h3>Jennifer Johnson Studio</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://www.detrastore.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Shopify Store</span><h3>Detra Store</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://miheso.in/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Shopify Store</span><h3>Miheso</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://vasstram.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Shopify Store</span><h3>Vasstram</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://youbae.in/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Shopify Store</span><h3>Youbae</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://catchyshine.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Shopify Store</span><h3>Catchyshine</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://parempire.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Shopify B2B</span><h3>Par Empire</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://hedonist-style.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Shopify Store</span><h3>Hedonist Chicago</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://www.amarisjewels.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Shopify Store</span><h3>Amaris Jewels</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://www.adornmonde.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Shopify Plus</span><h3>Adornmonde</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://jaydu.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Informative</span><h3>Jaydu</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://sakurion.net/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">Informative</span><h3>Sakurion</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://craftingera.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">WordPress E-com</span><h3>Crafting Era</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+                <article class="project-card"><a href="https://bangkokfirstaid.com/" target="_blank" class="project-link"><div class="project-content"><span class="project-badge">WordPress LMS</span><h3>Bangkok First Aid</h3></div><div class="project-meta"><span>Visit Live Store</span><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a></article>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section class="education" id="education">
+        <div class="container">
+            <div class="section-heading">
+                <span>Education</span>
+                <h2>Academic Background</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2017</span>
+                        <h3>Bachelor of Technology in Computer Science & Engineering</h3>
+                        <h4>FGIET Raebareli (AKTU)</h4>
+                        <p>Strong foundation in data structures, algorithms, object-oriented programming, and software engineering principles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-heading">
+                <span>Services</span>
+                <h2>What I Can Do</h2>
+                <p>Enterprise-grade web engineering solutions designed to scale operations and accelerate conversion metrics.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🛍️</div>
+                    <h3>Shopify & Shopify Plus Dev</h3>
+                    <p>End-to-end multi-region custom store architecture, checkout extensions, and high-performance layout engineering.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3>Enterprise ERP Integration</h3>
+                    <p>Connecting online storefronts with Bluecherry ERP, automated inventory workflows, and custom backend APIs.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📦</div>
+                    <h3>Subscriptions & POS</h3>
+                    <p>Recharge API implementation, unified physical/online point-of-sale setup, and automated recurring billing structures.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Performance Optimization</h3>
+                    <p>Comprehensive speed audits, Core Web Vitals refinement, script optimization, and page load reduction.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🌐</div>
+                    <h3>Global Expansion</h3>
+                    <p>Configuring Global-E, Shopify Markets, multi-currency localization, and localized international checkout setups.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>WordPress & WooCommerce</h3>
+                    <p>Custom PHP themes, Elementor implementations, security hardening, and high-volume e-commerce maintenance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="logo">Vinay<span>.</span></a>
+                    <p>Engineering premium e-commerce platforms, Shopify Plus architectures, and high-performance digital web experiences.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#about">About Me</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#services">Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact-info">
+                        <p>📍 India</p>
+                        <p>✉️ <a href="mailto:vnygupta21@gmail.com">vnygupta21@gmail.com</a></p>
+                        <p>📞 <a href="tel:+919807300129">+91 9807300129</a></p>
+                        <p>💼 Available for Senior Roles & Freelance</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Vinay Gupta. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="mailto:vnygupta21@gmail.com" class="social-link" title="Email">✉️</a>
+                    <a href="tel:+919807300129" class="social-link" title="Phone">📞</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        const navToggle = document.getElementById("navToggle");
+        const navLinks = document.getElementById("navLinks");
+        const navItems = document.querySelectorAll(".nav-item");
+
+        navToggle.addEventListener("click", () => {
+            navToggle.classList.toggle("active");
+            navLinks.classList.toggle("active");
+        });
+
+        navItems.forEach(item => {
+            item.addEventListener("click", () => {
+                navToggle.classList.remove("active");
+                navLinks.classList.remove("active");
+                navItems.forEach(nav => nav.classList.remove("active"));
+                item.classList.add("active");
+            });
+        });
+
+        const sections = document.querySelectorAll("section[id], header");
+        window.addEventListener("scroll", () => {
+            let scrollY = window.pageYOffset;
+            sections.forEach(current => {
+                const sectionHeight = current.offsetHeight;
+                const sectionTop = current.offsetTop - 100;
+                const sectionId = current.getAttribute("id");
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    navItems.forEach(item => {
+                        item.classList.remove("active");
+                        if (sectionId && item.getAttribute("href") === `#${sectionId}`) {
+                            item.classList.add("active");
+                        } else if (!sectionId && item.getAttribute("href") === "#") {
+                            item.classList.add("active");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
